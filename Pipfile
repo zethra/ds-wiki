@@ -7,6 +7,9 @@ name = "pypi"
 fastapi = "*"
 uvicorn = {extras = ["standard"], version = "*"}
 diff-match-patch = "*"
+sqlalchemy = "*"
+pydantic = "*"
+bcrypt = "*"
 
 [dev-packages]
 
