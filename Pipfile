@@ -10,6 +10,8 @@ diff-match-patch = "*"
 sqlalchemy = "*"
 pydantic = "*"
 bcrypt = "*"
+jinja2 = "*"
+python-multipart = "*"
 
 [dev-packages]
 

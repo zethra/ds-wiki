@@ -13,14 +13,16 @@ def get_user_by_name(db: Session, name: str) -> models.User:
 def get_users(db: Session, skip: int = 0, limit: int = 100) -> models.User:
     return db.query(models.User).offset(skip).limit(limit).all()
 
-def create_user(db: Session, user: schemas.UserCreate) -> models.User:
-    hashed_password = bcrypt.hashpw(user.password.encode("uft-8"), bcrypt.gensalt())
-    db_user = models.User(name=user.name, hashed_password=hashed_password)
+def create_user(db: Session, user: str) -> models.User:
+    db_user = models.User(name=user)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
 
-def authenticate_user(db: Session, user: schemas.UserAuth):
-    db_user_info = get_user_by_name(db, user.name)
-    return bcrypt.checkpw(user.password.encode('uft-8'), db_user_info.hashed_password.encode('uft-8'))
+def create_user_x(db: Session, user: schemas.User) -> models.User:
+    db_user = models.User(name=user.name)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
