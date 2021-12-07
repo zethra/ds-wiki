@@ -72,3 +72,10 @@ async def edit_page_post(name: str = Form(...), content: str = Form(...), db: Se
     crud.update_page_content(db, name, content)
     response = RedirectResponse(f"/edit_page/{name}", status_code=303)
     return response
+
+@app.get("/page/{page_name}")
+async def page(page_name: str, request: Request, db: Session = Depends(get_db)):
+    page = crud.get_page(db, page_name)
+    if page is None:
+        page = crud.create_page(db, schemas.Page(page_name, ""))
+    return templates.TemplateResponse("page.html", {'request': request, 'name': page.name, 'content': page.content})
