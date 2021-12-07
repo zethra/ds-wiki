@@ -70,7 +70,7 @@ async def edit_page(page_name: str, request: Request, db: Session = Depends(get_
 @app.post("/edit_page")
 async def edit_page_post(name: str = Form(...), content: str = Form(...), db: Session = Depends(get_db)):
     crud.update_page_content(db, name, content)
-    response = RedirectResponse(f"/edit_page/{name}", status_code=303)
+    response = RedirectResponse(f"/page/{name}", status_code=303)
     return response
 
 @app.get("/page/{page_name}")
