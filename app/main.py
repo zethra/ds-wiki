@@ -106,3 +106,20 @@ async def search(request: Request, query: Optional[str] = None, db: Session = De
         for page in crud.search_page(db, query):
             res.append(page.name)
     return templates.TemplateResponse("search.html", {'request': request, 'res': res})
+
+@app.get("/edit_admin")
+async def edit_admin(request: Request, db: Session = Depends(get_db)):
+    return templates.TemplateResponse("edit_admin.html", {'request': request, 'res': crud.get_users(db)})
+
+@app.post("/edit_admin")
+async def edit_admin_post(request: Request, db: Session = Depends(get_db)):
+    form_data = await request.form()
+    print(form_data)
+    for user in crud.get_users(db):
+        if user.name in form_data:
+            crud.update_admin(db, user.name, True)
+            print(user.name, 'admin')
+        else:
+            print(user.name, 'not admin')
+            crud.update_admin(db, user.name, False)
+    return templates.TemplateResponse("edit_admin.html", {'request': request, 'res': crud.get_users(db)})

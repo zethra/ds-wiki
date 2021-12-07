@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <title>RIT Wiki</title>
+    <link href="{{ url_for('static', path='/main.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Search Pages</h1>
+    <form action="/edit_admin" method="post">
+      <ul>
+      {% for user in res %}
+        <li>
+          <label for="{{user.name}}">{{user.name}}</label>
+          <input type="checkbox" name="{{user.name}}" {% if user.admin %}checked{% endif %}>
+        </li>
+      {% endfor %}
+      </ul>
+      <input type="submit" value="Update">
+    </form>
+    <a href="/">Home</a>
+  </body>
+</html>
