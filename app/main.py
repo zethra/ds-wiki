@@ -55,7 +55,8 @@ async def create_post(user: str = Form(...), db: Session = Depends(get_db)):
     if existing_user:
         return HTTPException(status_code=400, detail="User already registered")
     else:
-        new_user = crud.create_user(db, user)
+        admin = crud.no_users(db)
+        new_user = crud.create_user(db, user, admin)
         response = RedirectResponse("/", status_code=303)
         response.set_cookie(key='user', value=new_user.name)
         return response

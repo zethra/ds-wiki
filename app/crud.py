@@ -4,6 +4,9 @@ from sqlalchemy.orm import Session
 
 from . import models, schemas
 
+def no_users(db: Session) -> bool:
+    return db.query(models.User).count() == 0
+
 def get_user(db: Session, user_id: int) -> models.User:
     return db.query(models.User).filter(models.User.id == user_id).first()
 
@@ -13,19 +16,16 @@ def get_user_by_name(db: Session, name: str) -> models.User:
 def get_users(db: Session) -> models.User:
     return db.query(models.User).all()
 
-def create_user(db: Session, user: str) -> models.User:
-    db_user = models.User(name=user)
+def create_user(db: Session, user: str, admin: bool) -> models.User:
+    db_user = models.User(name=user, admin=admin)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
 
-def create_user_x(db: Session, user: schemas.User) -> models.User:
-    db_user = models.User(name=user.name)
-    db.add(db_user)
+def update_admin(db: Session, user: str, admin: bool):
+    db.query(models.User).filter(models.User.name == user).update({models.User.admin: admin})
     db.commit()
-    db.refresh(db_user)
-    return db_user
 
 def search_page(db: Session, name: str) -> models.Page:
     return db.query(models.Page).filter(models.Page.name.like('%' + name + '%')).all()
