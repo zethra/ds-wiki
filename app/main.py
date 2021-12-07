@@ -79,3 +79,12 @@ async def page(page_name: str, request: Request, db: Session = Depends(get_db)):
     if page is None:
         page = crud.create_page(db, schemas.Page(page_name, ""))
     return templates.TemplateResponse("page.html", {'request': request, 'name': page.name, 'content': page.content})
+
+@app.get("/create_page")
+async def create_page(request: Request):
+    return templates.TemplateResponse("create_page.html", {'request': request})
+
+@app.post("/create_page")
+async def create_page_post(name: str = Form(...)):
+    response = RedirectResponse(f"/edit_page/{name}", status_code=303)
+    return response
