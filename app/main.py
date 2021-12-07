@@ -88,3 +88,11 @@ async def create_page(request: Request):
 async def create_page_post(name: str = Form(...)):
     response = RedirectResponse(f"/edit_page/{name}", status_code=303)
     return response
+
+@app.get("/search")
+async def search(request: Request, query: Optional[str] = None, db: Session = Depends(get_db)):
+    res = []
+    if query:
+        for page in crud.search_page(db, query):
+            res.append(page.name)
+    return templates.TemplateResponse("search.html", {'request': request, 'res': res})
