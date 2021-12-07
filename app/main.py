@@ -28,8 +28,13 @@ def get_db():
         db.close()
 
 @app.get("/")
-async def index(request: Request):
-    return templates.TemplateResponse("index.html", {'request': request})
+async def index(request: Request, db: Session = Depends(get_db), user: Optional[str] = Cookie(None)):
+    admin = False
+    if user:
+        current_user = crud.get_user_by_name(db, user)
+        if current_user.admin:
+            admin = True
+    return templates.TemplateResponse("index.html", {'request': request, 'admin': admin})
 
 @app.get("/login")
 async def login(request: Request):
@@ -44,6 +49,12 @@ async def login_post(user: str = Form(...), db: Session = Depends(get_db)):
         return response
     else:
         return HTTPException(status_code=400, detail="User doesn't exist")
+
+@app.get("/logout")
+async def logout():
+    response = RedirectResponse("/", status_code=303)
+    response.set_cookie(key='user', value='')
+    return response
 
 @app.get("/create")
 async def create(request: Request):
@@ -108,18 +119,28 @@ async def search(request: Request, query: Optional[str] = None, db: Session = De
     return templates.TemplateResponse("search.html", {'request': request, 'res': res})
 
 @app.get("/edit_admin")
-async def edit_admin(request: Request, db: Session = Depends(get_db)):
+async def edit_admin(request: Request, db: Session = Depends(get_db), user: Optional[str] = Cookie(None)):
+    if user is None:
+        return RedirectResponse(f"/login", status_code=303)
+    current_user = crud.get_user_by_name(db, user)
+    if not current_user.admin:
+        return "Not admin"
     return templates.TemplateResponse("edit_admin.html", {'request': request, 'res': crud.get_users(db)})
 
 @app.post("/edit_admin")
-async def edit_admin_post(request: Request, db: Session = Depends(get_db)):
+async def edit_admin_post(request: Request, db: Session = Depends(get_db), user: Optional[str] = Cookie(None)):
+    if user is None:
+        return RedirectResponse(f"/login", status_code=303)
+    current_user = crud.get_user_by_name(db, user)
+    if not current_user.admin:
+        return "Not admin"
     form_data = await request.form()
     print(form_data)
-    for user in crud.get_users(db):
-        if user.name in form_data:
-            crud.update_admin(db, user.name, True)
-            print(user.name, 'admin')
+    for u in crud.get_users(db):
+        if u.name in form_data:
+            crud.update_admin(db, u.name, True)
+            print(u.name, 'admin')
         else:
-            print(user.name, 'not admin')
-            crud.update_admin(db, user.name, False)
+            print(u.name, 'not admin')
+            crud.update_admin(db, u.name, False)
     return templates.TemplateResponse("edit_admin.html", {'request': request, 'res': crud.get_users(db)})

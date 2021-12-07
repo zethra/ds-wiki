@@ -5,9 +5,15 @@
   </head>
   <body>
     <h1>Welcome to the RIT Wiki</h1>
-    <a href="/login">Login</a>
-    <a href="/create">Create Account</a>
-    <a href="/create_page">Create Page</a>
-    <a href="/search">Search</a>
+    <ul>
+      <li><a href="/login">Login</a></li>
+      <li><a href="/create">Create Account</a></li>
+      <li><a href="/create_page">Create Page</a></li>
+      <li><a href="/search">Search</a></li>
+      {% if admin %}
+      <li><a href="/edit_admin">Edit Admins</a></li>
+      {% endif %}
+      <li><a href="/logout">Logout</a></li>
+    </ul>
   </body>
 </html>
