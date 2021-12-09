@@ -46,24 +46,34 @@ def get_coordinator():
 
 # This is used when a server forwards a client edit for a page request
 @app.post("/request_page_commit")
-async def request_page_commit(commit: RequestPageCommit):
-    # create a pending commit in the log
-    # send can_commit to each of the servers for the transaction
-    # if all are willing to commit:
-        # send do_commit:commit to all
-        # once they all succeed at that
-        # return 200
-    # if not
-        # send do_commit: abort to all
-        # return 409
+async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(get_db),
+                              data_servers=Depends(get_servers())):
+    # new transaction:
+        # find the largest transaction id (tid) in the log so far (or 1 if it dne)
+        # create a new item in the log with status pending commit and all the other data to fill in
+    # end transaction
+
+    # for each server in data_servers:
+        # send PageCommit msg to /can_page_commit
+        # check response msg (CommitReply) and see if commit is True
+
+    # if all commitReply are true:
+        # foreach server in data_servers:
+            #send DoCommit with commit=True to /do_commit
+            # collect responses (HaveCommit msgs)
+        # return status code 200
+
+    # if at least one commitreply had false:
+        # foreach server in data_servers:
+            # send DoCommit with commit=FALSE to /do_commit
+            # collect responses (HaveCommit msgs)
+        # return some error status code
     pass
 
 
 @app.post("/request_user_commit")
 async def request_user_commit(commit: RequestUserCommit):
-    # create a pending commit in the log
-    # add each server to the pending_commit log as requested
-    # send can_commit to each of the servers for the transaction
+    # same as above but for user commits
     pass
 
 #
