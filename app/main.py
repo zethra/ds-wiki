@@ -34,7 +34,7 @@ async def index(request: Request, db: Session = Depends(get_db), user: Optional[
         current_user = crud.get_user_by_name(db, user)
         if current_user.admin:
             admin = True
-    return templates.TemplateResponse("index.html", {'request': request, 'admin': admin})
+    return templates.TemplateResponse("index.html", {'request': request, 'admin': admin, 'user': user})
 
 @app.get("/login")
 async def login(request: Request):
@@ -75,9 +75,13 @@ async def create_post(user: str = Form(...), db: Session = Depends(get_db)):
 @app.get("/edit_page/{page_name}")
 async def edit_page(page_name: str, request: Request, db: Session = Depends(get_db), user: Optional[str] = Cookie(None)):
     if user:
+        existing_user = crud.get_user_by_name(db, user)
         page = crud.get_page(db, page_name)
         if page is None:
-            page = crud.create_page(db, schemas.Page(page_name, ""))
+            if existing_user.admin:
+                page = crud.create_page(db, schemas.Page(page_name, ""))
+            else:
+                return RedirectResponse(f"/login", status_code=303)
         return templates.TemplateResponse("edit_page.html", {'request': request, 'name': page.name, 'content': page.content})
     else:
         return RedirectResponse(f"/login", status_code=303)

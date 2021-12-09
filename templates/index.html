@@ -4,16 +4,18 @@
     <link href="{{ url_for('static', path='/main.css') }}" rel="stylesheet">
   </head>
   <body>
-    <h1>Welcome to the RIT Wiki</h1>
+    <h1>Welcome to the RIT Wiki {% if user %}- {{ user }}{% endif %}</h1>
     <ul>
       <li><a href="/login">Login</a></li>
       <li><a href="/create">Create Account</a></li>
-      <li><a href="/create_page">Create Page</a></li>
       <li><a href="/search">Search</a></li>
       {% if admin %}
+      <li><a href="/create_page">Create Page</a></li>
       <li><a href="/edit_admin">Edit Admins</a></li>
       {% endif %}
+      {% if user %}
       <li><a href="/logout">Logout</a></li>
+      {% endif %}
     </ul>
   </body>
 </html>
