@@ -48,22 +48,32 @@ def get_coordinator():
 @app.post("/request_page_commit")
 async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(get_db),
                               data_servers=Depends(get_servers())):
+    # Log table is basically a list of all commits we have attempted
+    # PendingCommits tracks the status of any in-progress commits for each server participating (so pk is (tid, sender) )
+
     # new transaction:
         # find the largest transaction id (tid) in the log so far (or 1 if it dne)
         # create a new item in the log with status pending commit and all the other data to fill in
     # end transaction
 
     # for each server in data_servers:
+        # add (tid, server) to PendingCommits db table with sender=server_ip and status=requested
         # send PageCommit msg to /can_page_commit
         # check response msg (CommitReply) and see if commit is True
+        # update status in PendingCommits db table for that tid+sender with status=promised or aborted
 
     # if all commitReply are true:
+        # change status of commit in log to promised
         # foreach server in data_servers:
-            #send DoCommit with commit=True to /do_commit
+            # update status in PendingCommits db table for that tid+sender with status=started
+            # send DoCommit with commit=True to /do_commit
             # collect responses (HaveCommit msgs)
+            # remove from PendingCommits db table
+        # change status of commit in log to done
         # return status code 200
 
     # if at least one commitreply had false:
+        # change status of commit in log to aborted
         # foreach server in data_servers:
             # send DoCommit with commit=FALSE to /do_commit
             # collect responses (HaveCommit msgs)
