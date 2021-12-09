@@ -1,0 +1,18 @@
+<html>
+  <head>
+    <title>RIT Wiki</title>
+    <link href="{{ url_for('static', path='/main.css') }}" rel="stylesheet">
+  </head>
+  <body>
+    <h1>Search Pages</h1>
+    <form action="/search">
+      <input name="query">
+    </form>
+    <ul>
+    {% for name in res %}
+      <li><a href="/page/{{name}}">{{name}}</a></li>
+    {% endfor %}
+    </ul>
+    <a href="/">Home</a>
+  </body>
+</html>
