@@ -14,7 +14,7 @@ import start
 from app import crud, models, schemas
 
 from .database import SessionLocal, engine
-from .schemas import PageCommit, DoCommit, UserCommit, CommitReply, HaveCommit
+from .schemas import PageCommit, DoCommit, UserCommit, CommitReply, HaveCommit, RequestUserCommit, RequestPageCommit
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -55,7 +55,7 @@ async def index(request: Request, db: Session = Depends(get_db), user: Optional[
         current_user = crud.get_user_by_name(db, user)
         if current_user.admin:
             admin = True
-    return templates.TemplateResponse("index.html", {'request': request, 'admin': admin})
+    return templates.TemplateResponse("index.html", {'request': request, 'admin': admin, 'user': user})
 
 
 @app.get("/login")
@@ -87,29 +87,46 @@ async def create(request: Request):
 
 
 @app.post("/create")
-async def create_post(user: str = Form(...), db: Session = Depends(get_db)):
+async def create_post(user: str = Form(...), db: Session = Depends(get_db), coord: str = Depends(get_coordinator)):
     existing_user = crud.get_user_by_name(db, user)
     if existing_user:
         return HTTPException(status_code=400, detail="User already registered")
     else:
         admin = crud.no_users(db)
         # new_user = crud.create_user(db, user, admin)
-        # TODO start commit attempt
-
-        response = RedirectResponse("/login", status_code=303)
-        return response
+        data = RequestUserCommit(name=user, admin=admin).dict()
+        async with httpx.AsyncClient() as client:
+            coord_response = await client.post(coord + '/request_user_commit', json=data)
+        if coord_response.status_code == 200:
+            response = RedirectResponse("/login", status_code=303)
+            return response
+        else:
+            response = RedirectResponse("/create_user_failed", status_code=303)
+            return response
 
 
 @app.get("/edit_page/{page_name}")
 async def edit_page(page_name: str, request: Request, db: Session = Depends(get_db),
-                    user: Optional[str] = Cookie(None)):
+                    coord: str = Depends(get_coordinator), user: Optional[str] = Cookie(None)):
     if user:
+        existing_user = crud.get_user_by_name(db, user)
         page = crud.get_page(db, page_name)
         if page is None:
-            # page = crud.create_page(db, schemas.Page(page_name, ""))
-            # TODO do the commit
-        return templates.TemplateResponse("edit_page.html",
-                                          {'request': request, 'name': page.name, 'content': page.content})
+            if existing_user.admin:
+                # page = crud.create_page(db, schemas.Page(page_name, ""))
+                data = RequestPageCommit(page=page_name, content='')
+                async with httpx.AsyncClient() as client:
+                    coord_response = await client.post(coord + '/request_page_commit', json=data)
+                if coord_response.status_code == 200:
+                    # 200 indicates that the db has been updated
+                    response = templates.TemplateResponse("edit_page.html", {'request': request, 'name': page.name, 'content': page.content})
+                    return response
+                else:
+                    response = RedirectResponse("create_page_failed.html", status_code=303)
+                    return response
+            else:
+                return RedirectResponse(f"/login", status_code=303)
+        return templates.TemplateResponse("edit_page.html", {'request': request, 'name': page.name, 'content': page.content})
     else:
         return RedirectResponse(f"/login", status_code=303)
 
@@ -119,20 +136,39 @@ async def edit_page_post(name: str = Form(...), content: str = Form(...), db: Se
                          coord: str = Depends(get_coordinator), user: Optional[str] = Cookie(None)):
     if user:
         # crud.update_page_content(db, name, content)
-        data = PageCommit(page=name, content=content).dict()
+        data = RequestPageCommit(page=name, content=content).dict()
         async with httpx.AsyncClient() as client:
             coord_response = await client.post(coord + '/request_page_commit', json=data)
         if coord_response.status_code == 200:
+            # 200 indicates that the db has been updated
             response = RedirectResponse(f"/page/{name}", status_code=303)
             return response
         else:
-            response = RedirectResponse(f"/page/", status_code=303)
+            response = RedirectResponse(f"/edit_page_failed/{name}", status_code=303)
             return response
     else:
         return RedirectResponse(f"/login", status_code=303)
 
+
+@app.get("/create_page_failed")
+async def create_page_failed(request: Request):
+    return templates.TemplateResponse("create_page_failed.html", {'request': request})
+
+
 @app.get("/edit_page_failed/{page_name}")
-async def edit_page_failed(page_name: str, request: Request)
+async def edit_page_failed(page_name: str, request: Request):
+    return templates.TemplateResponse("edit_page_failed.html", {'request': request, 'name': page_name})
+
+
+@app.get("/create_user_failed")
+async def create_user_failed(request: Request):
+    return templates.TemplateResponse("create_user_failed.html", {'request': request})
+
+
+@app.get("/edit_admin_failed")
+async def edit_admin_failed(request: Request):
+    return templates.TemplateResponse("edit_admin_failed", {'request': request})
+
 
 @app.get("/pages")
 async def pages(request: Request, db: Session = Depends(get_db)):
@@ -186,7 +222,8 @@ async def edit_admin(request: Request, db: Session = Depends(get_db), user: Opti
 
 
 @app.post("/edit_admin")
-async def edit_admin_post(request: Request, db: Session = Depends(get_db), user: Optional[str] = Cookie(None)):
+async def edit_admin_post(request: Request, db: Session = Depends(get_db),
+                          coord: str = Depends(get_coordinator), user: Optional[str] = Cookie(None)):
     if user is None:
         return RedirectResponse(f"/login", status_code=303)
     current_user = crud.get_user_by_name(db, user)
@@ -194,17 +231,33 @@ async def edit_admin_post(request: Request, db: Session = Depends(get_db), user:
         return "Not admin"
     form_data = await request.form()
     print(form_data)
+    success = True
     for u in crud.get_users(db):
         if u.name in form_data:
             # crud.update_admin(db, u.name, True)
-            # TODO start commit attempt
-            async with http.AsyncClient
-            print(u.name, 'admin')
+            data = RequestUserCommit(name=u.name, admin=True).dict()
+            async with httpx.AsyncClient() as client:
+                coord_response = await client.post(coord + '/request_user_commit', json=data)
+            if coord_response.status_code != 200:
+                success = False
+                print('failed', u.name, 'admin')
+            else:
+                print(u.name, 'admin')
         else:
-            print(u.name, 'not admin')
             # crud.update_admin(db, u.name, False)
-            # TODO start commit attempt
-    return templates.TemplateResponse("edit_admin.html", {'request': request, 'res': crud.get_users(db)})
+            data = RequestUserCommit(name=u.name, admin=False).dict()
+            async with httpx.AsyncClient() as client:
+                coord_response = await client.post(coord + '/request_user_commit', json=data)
+            if coord_response.status_code != 200:
+                success = False
+                print('failed', u.name, 'not admin')
+            else:
+                print(u.name, 'not admin')
+
+        if success:
+            return templates.TemplateResponse("edit_admin.html", {'request': request, 'res': crud.get_users(db)})
+        else:
+            return templates.TemplateResponse("edit_admin_failed.html", {'request': request})
 
 
 @app.post("/can_page_commit")
