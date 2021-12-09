@@ -12,6 +12,8 @@ pydantic = "*"
 bcrypt = "*"
 jinja2 = "*"
 python-multipart = "*"
+toml = "*"
+httpx = "*"
 
 [dev-packages]
 
