@@ -87,7 +87,7 @@ async def startup_event():
     CONFIG['PORT'] = conf['port']
     CONFIG['COORD'] = conf['coordinator']
     CONFIG['SERVERS'] = conf['replicas']
-    # TODO check db for anything in a weird state and resolve it
+    # TODO check db log table for anything in a weird state and resolve it
 
 
 @app.get("/")
@@ -436,7 +436,9 @@ async def can_page_commit(commit: PageCommit, db: Session = Depends(get_db), ip:
         db_log = crud.get_log(db, commit.transaction_id)
         if db_log.status == 'promised':
             return CommitReply(sender=ip, commit=True, transaction_id=commit.transaction_id)
-        return CommitReply(sender=ip, commit=False, transaction_id=commit.transaction_id)
+        else:
+            # should this change status to aborted in log?
+            return CommitReply(sender=ip, commit=False, transaction_id=commit.transaction_id)
     else:
         crud.add_to_log(db, commit.transaction_id, 'page', 'promised', commit.page, commit.content, False)
         return CommitReply(sender=ip, commit=True, transaction_id=commit.transaction_id)
@@ -456,7 +458,9 @@ async def can_user_commit(commit: UserCommit, db: Session = Depends(get_db), ip:
         db_log = crud.get_log(db, commit.transaction_id)
         if db_log.status == 'promised':
             return CommitReply(transaction_id=commit.transaction_id, sender=ip, commit=True)
-        return CommitReply(transaction_id=commit.transaction_id, sender=ip, commit=False)
+        else:
+            # should this change status to aborted in log?
+            return CommitReply(transaction_id=commit.transaction_id, sender=ip, commit=False)
     else:
         crud.add_to_log(db, commit.transaction_id, 'user', 'promised', commit.name, '', commit.admin)
         return CommitReply(transaction_id=commit.transaction_id, sender=ip, commit=True)
@@ -475,7 +479,7 @@ async def do_commit(commit: DoCommit, db: Session = Depends(get_db), ip: str = D
     """
     if crud.tid_in_log(db, commit.transaction_id):
         db_log = crud.get_log(db, commit.transaction_id)
-        if db_log.status == 'promised':
+        if db_log.status == 'promised' or db_log.status == 'committed':
             crud.update_in_log(db, commit.transaction_id, db_log.type, 'committed', db_log.name, db_log.content, db_log.admin)
             if db_log.type == 'user':
                 crud.create_or_update_user(db, commit.transaction_id)
