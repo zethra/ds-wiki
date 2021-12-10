@@ -2,6 +2,7 @@
 Entry script for the program.
 """
 
+import sys
 import uvicorn
 import toml
 
@@ -14,7 +15,7 @@ def read_config():
     Load the config from the TOML file at /config/config.toml
     :return: Dictionary with the config information.
     """
-    return toml.load('config/config.toml')
+    return toml.load(sys.argv[1])
 
 
 """

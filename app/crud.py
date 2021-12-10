@@ -150,7 +150,7 @@ def add_to_log(db: Session, tid: int, ttype: str, status: str, name: str, conten
     :param admin: The admin rights of the user being committed. None for page.
     :return: None
     """
-    db_log = models.Log(tid=tid, type=ttype, status=status, name=name, conten=content, admin=admin)
+    db_log = models.Log(tid=tid, type=ttype, status=status, name=name, content=content, admin=admin)
     db.add(db_log)
     db.commit()
     db.refresh(db_log)
@@ -168,13 +168,11 @@ def update_in_log(db: Session, tid: int, ttype: str, status: str, name: str, con
     :param admin: The admin rights of the user being committed. None for page.
     :return: None
     """
-    db_log = models.Log(tid=tid, type=ttype, status=status, name=name, conten=content, admin=admin)
-    db.query(models.Log)\
-        .filter(models.Log.tid == tid)\
+    db.query(models.Log) \
+        .filter(models.Log.tid == tid) \
         .update({models.Log.status: status, models.Log.name: name, models.Log.content: content,
                  models.Log.admin: admin}, synchronize_session=False)
     db.commit()
-    db.refresh(db_log)
 
 
 def update_page_content(db: Session, page_name: str, page_content: str):
@@ -200,18 +198,18 @@ def create_or_update_user(db: Session, tid: int):
     :return: None
     """
     db_user = None
-    with db.begin():  # commits at end or rollback on exception
-        to_commit = get_log(db, tid)
-        existing_user = get_user_by_name(db, to_commit.name)
-        if existing_user:
-            db.query(models.User)\
-                .filter(models.User.name == to_commit.name)\
-                .update({models.User.admin: to_commit.admin}, synchronize_session=False)
-        else:
-            db_user = models.User(name=to_commit.name, admin=to_commit.admin)
-            db.add(db_user)
-    if db_user:
-        db.refresh(db_user)
+    to_commit = get_log(db, tid)
+    existing_user = get_user_by_name(db, to_commit.name)
+    if existing_user:
+        db.query(models.User)\
+            .filter(models.User.name == to_commit.name)\
+            .update({models.User.admin: to_commit.admin}, synchronize_session=False)
+    else:
+        db_user = models.User(name=to_commit.name, admin=to_commit.admin)
+        db.add(db_user)
+    db.commit()
+    # if db_user:
+    #     db.refresh(db_user)
 
 
 def create_or_update_page(db: Session, tid: int):
@@ -260,6 +258,7 @@ def new_user_commit_to_log(db: Session, commit: RequestUserCommit):
     :return: The tid fo the newly created transaction log entry.
     """
     db_log = models.Log(type='page', status='pending', name=commit.name, content='', admin=commit.admin)
+    db.add(db_log)
     db.commit()
     db.refresh(db_log)
     tid = db_log.tid
@@ -275,9 +274,9 @@ def new_commit_to_pending(db: Session, tid: int, sender: str, status: str):
     :param status: The status of the commit.
     :return: None.
     """
-    with db.begin():
-        db_pending = models.PendingCommits(tid=tid, sender=sender, status=status)
-        db.add(db_pending)
+    db_pending = models.PendingCommits(tid=tid, sender=sender, status=status)
+    db.add(db_pending)
+    db.commit()
 
 
 def update_status_in_pending(db: Session, tid: int, sender: str, status: str):
@@ -289,7 +288,6 @@ def update_status_in_pending(db: Session, tid: int, sender: str, status: str):
     :param status: The new status of the commit.
     :return: None.
     """
-    with db.begin():
-        db.query(models.PendingCommits)\
-            .filter(models.PendingCommits.tid == tid and models.PendingCommits.sender == sender)\
-            .update({models.PendingCommits.status: status}, synchronize_session=False)
+    db.query(models.PendingCommits)\
+        .filter(models.PendingCommits.tid == tid and models.PendingCommits.sender == sender)\
+        .update({models.PendingCommits.status: status}, synchronize_session=False)

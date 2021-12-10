@@ -2,6 +2,8 @@
 Database setup for the webapp.
 """
 
+import os
+import sys
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -9,7 +11,7 @@ from sqlalchemy.orm import sessionmaker
 """
 Where the Sqlite database can be found.
 """
-SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app.db"
+SQLALCHEMY_DATABASE_URL = f"sqlite:///./sql_app_{os.path.basename(sys.argv[1])}.db"
 
 """
 The db engine.
