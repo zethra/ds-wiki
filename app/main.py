@@ -336,7 +336,7 @@ async def edit_admin(request: Request, db: Session = Depends(get_db), user: Opti
         return RedirectResponse(f"/login", status_code=303)
     current_user = crud.get_user_by_name(db, user)
     if not current_user.admin:
-        return "Not admin"
+        return RedirectResponse('/', status_code=303)
     return templates.TemplateResponse("edit_admin.html", {'request': request, 'res': crud.get_users(db)})
 
 
@@ -356,7 +356,7 @@ async def edit_admin_post(request: Request, db: Session = Depends(get_db),
         return RedirectResponse(f"/login", status_code=303)
     current_user = crud.get_user_by_name(db, user)
     if not current_user.admin:
-        return "Not admin"
+        return RedirectResponse('/', status_code=303)
     form_data = await request.form()
     print(form_data)
     success = True
@@ -384,10 +384,14 @@ async def edit_admin_post(request: Request, db: Session = Depends(get_db),
             else:
                 print(u.name, 'not admin')
 
-        if success:
-            return templates.TemplateResponse("edit_admin.html", {'request': request, 'res': crud.get_users(db)})
+    if success:
+        current_user = crud.get_user_by_name(db, user)
+        if current_user.admin:
+            return RedirectResponse('/edit_admin', status_code=303)
         else:
-            return templates.TemplateResponse("edit_admin_failed.html", {'request': request})
+            return RedirectResponse('/', status_code=303)
+    else:
+        return templates.TemplateResponse("edit_admin_failed.html", {'request': request})
 
 
 @app.get("/create_page_failed")
