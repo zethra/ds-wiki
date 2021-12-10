@@ -67,7 +67,9 @@ def update_admin(db: Session, user: str, admin: bool):
     :param admin: The new value for the admin rights for the user.
     :return: None.
     """
-    db.query(models.User).filter(models.User.name == user).update({models.User.admin: admin})
+    db.query(models.User)\
+        .filter(models.User.name == user)\
+        .update({models.User.admin: admin}, synchronize_session=False)
     db.commit()
 
 
@@ -167,8 +169,10 @@ def update_in_log(db: Session, tid: int, ttype: str, status: str, name: str, con
     :return: None
     """
     db_log = models.Log(tid=tid, type=ttype, status=status, name=name, conten=content, admin=admin)
-    db.query(models.Log).filter(models.Log.tid == tid).update({models.Log.status: status, models.Log.name: name,
-                                                               models.Log.content: content, models.Log.admin: admin})
+    db.query(models.Log)\
+        .filter(models.Log.tid == tid)\
+        .update({models.Log.status: status, models.Log.name: name, models.Log.content: content,
+                 models.Log.admin: admin}, synchronize_session=False)
     db.commit()
     db.refresh(db_log)
 
@@ -182,8 +186,9 @@ def update_page_content(db: Session, page_name: str, page_content: str):
     :return: None.
     """
     print('update page', page_name, 'with', page_content)
-    db.query(models.Page).filter(models.Page.name == page_name).update({models.Page.content: page_content},
-                                                                       synchronize_session=False)
+    db.query(models.Page)\
+        .filter(models.Page.name == page_name)\
+        .update({models.Page.content: page_content}, synchronize_session=False)
     db.commit()
 
 
@@ -199,7 +204,9 @@ def create_or_update_user(db: Session, tid: int):
         to_commit = get_log(db, tid)
         existing_user = get_user_by_name(db, to_commit.name)
         if existing_user:
-            db.query(models.User).filter(models.User.name == to_commit.name).update({models.User.admin: to_commit.admin})
+            db.query(models.User)\
+                .filter(models.User.name == to_commit.name)\
+                .update({models.User.admin: to_commit.admin}, synchronize_session=False)
         else:
             db_user = models.User(name=to_commit.name, admin=to_commit.admin)
             db.add(db_user)
@@ -209,7 +216,7 @@ def create_or_update_user(db: Session, tid: int):
 
 def create_or_update_page(db: Session, tid: int):
     """
-    Commit the page coommit to the db.
+    Commit the page commit to the db.
     :param db: The db session to use.
     :param tid: The tid of the entry in the log to commit.
     :return: None.
@@ -219,7 +226,9 @@ def create_or_update_page(db: Session, tid: int):
         to_commit = get_log(db, tid)
         existing_page = get_page(db, to_commit.name)
         if existing_page:
-            db.query(models.Page).filter(models.Page.name == to_commit.name).update({models.Page.content: to_commit.content})
+            db.query(models.Page)\
+                .filter(models.Page.name == to_commit.name)\
+                .update({models.Page.content: to_commit.content}, synchronize_session=False)
         else:
             db_page = models.Page(name=to_commit.name, content=to_commit.content)
             db.add(db_page)
@@ -229,7 +238,8 @@ def create_or_update_page(db: Session, tid: int):
 
 def new_page_commit_to_log(db: Session, commit: RequestPageCommit):
     """
-    Create a new page commit entry in the log
+    Create a new page commit entry in the log.
+    The pending status indicates that one should refer to the pending commits for more information.
     :param db: The db session to use.
     :param commit: The page commit to try to commit.
     :return: The tid of the newly created transaction log entry.
@@ -244,6 +254,7 @@ def new_page_commit_to_log(db: Session, commit: RequestPageCommit):
 def new_user_commit_to_log(db: Session, commit: RequestUserCommit):
     """
     Create a new user commit entry in the log.
+    The pending status indicates that one should refer to the pending commits for more information.
     :param db: The db session to use.
     :param commit: The user commit to try to commit.
     :return: The tid fo the newly created transaction log entry.
@@ -253,3 +264,32 @@ def new_user_commit_to_log(db: Session, commit: RequestUserCommit):
         db.refresh(db_log)
         tid = db_log.tid
     return tid
+
+
+def new_commit_to_pending(db: Session, tid: int, sender: str, status: str):
+    """
+    Adds a new in-progress commit to the PendingCommits table.
+    :param db: The database where the PendingCommits are stored.
+    :param tid: The transaction id of the commit that is pending.
+    :param sender: The sender ip associated with the commit status.
+    :param status: The status of the commit.
+    :return: None.
+    """
+    with db.begin():
+        db_pending = models.PendingCommits(tid=tid, sender=sender, status=status)
+        db.add(db_pending)
+
+
+def update_status_in_pending(db: Session, tid: int, sender: str, status: str):
+    """
+    Updates the status of a pending commit in the PendingCommits table.
+    :param db: The database where the PendingCommits are stored.
+    :param tid: The transaction id of the commit that is pending.
+    :param sender: The sender ip associated with the commit status.
+    :param status: The new status of the commit.
+    :return: None.
+    """
+    with db.begin():
+        db.query(models.PendingCommits)\
+            .filter(models.PendingCommits.tid == tid and models.PendingCommits.sender == sender)\
+            .update({models.PendingCommits.status: status}, synchronize_session=False)

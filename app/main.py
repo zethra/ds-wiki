@@ -31,6 +31,7 @@ templates = Jinja2Templates(directory="templates")
 """ Dictionary of useful config data """
 CONFIG = {}
 
+
 def get_db():
     """
     FastAPI Dependency Injection giving access to the db to route handlers.
@@ -470,7 +471,8 @@ async def can_user_commit(commit: UserCommit, db: Session = Depends(get_db), ip:
 async def do_commit(commit: DoCommit, db: Session = Depends(get_db), ip: str = Depends(get_ip)):
     """
     POST route handler for when the coordinator wants this data server to perform the commit that it promised
-    it could do. Commits the pending commit from the log.
+    it could do. If the coordinator has commit=False, then abort the commit.
+    If commit=true, commits the pending commit from the log.
     2nd Phase of 2PC.
     :param commit: JSON message with the transaction id to commit.
     :param db: The database with the commit log and the tables where the data is to be committed.
@@ -479,16 +481,20 @@ async def do_commit(commit: DoCommit, db: Session = Depends(get_db), ip: str = D
     """
     if crud.tid_in_log(db, commit.transaction_id):
         db_log = crud.get_log(db, commit.transaction_id)
-        if db_log.status == 'promised' or db_log.status == 'committed':
-            crud.update_in_log(db, commit.transaction_id, db_log.type, 'committed', db_log.name, db_log.content, db_log.admin)
-            if db_log.type == 'user':
-                crud.create_or_update_user(db, commit.transaction_id)
-            elif db_log.type == 'page':
-                crud.create_or_update_page(db, commit.transaction_id)
-            return HaveCommit(transaction_id=commit.transaction_id, sender=ip, commit=True)
-        else:
+        if not commit.commit:  # coordinator decided to abort the commit
             crud.update_in_log(db, commit.transaction_id, db_log.type, 'aborted', db_log.name, db_log.content, db_log.admin)
             return HaveCommit(transaction_id=commit.transaction_id, sender=ip, commit=False)
+        else:
+            if db_log.status == 'promised' or db_log.status == 'committed':
+                crud.update_in_log(db, commit.transaction_id, db_log.type, 'committed', db_log.name, db_log.content, db_log.admin)
+                if db_log.type == 'user':
+                    crud.create_or_update_user(db, commit.transaction_id)
+                elif db_log.type == 'page':
+                    crud.create_or_update_page(db, commit.transaction_id)
+                return HaveCommit(transaction_id=commit.transaction_id, sender=ip, commit=True)
+            else:
+                crud.update_in_log(db, commit.transaction_id, db_log.type, 'aborted', db_log.name, db_log.content, db_log.admin)
+                return HaveCommit(transaction_id=commit.transaction_id, sender=ip, commit=False)
     else:
         crud.add_to_log(db, commit.transaction_id, '', 'aborted', '', '', False)
         return HaveCommit(transaction_id=commit.transaction_id, sender=ip, commit=False)
