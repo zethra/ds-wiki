@@ -242,10 +242,11 @@ def new_page_commit_to_log(db: Session, commit: RequestPageCommit):
     :param commit: The page commit to try to commit.
     :return: The tid of the newly created transaction log entry.
     """
-    with db.begin():
-        db_log = models.Log(type='page', status='pending', name=commit.page, content=commit.content, admin=False)
-        db.refresh(db_log)  # updates db_log to have the db assigned tid
-        tid = db_log.tid
+    db_log = models.Log(type='page', status='pending', name=commit.page, content=commit.content, admin=False)
+    db.add(db_log)
+    db.commit()
+    db.refresh(db_log)  # updates db_log to have the db assigned tid
+    tid = db_log.tid
     return tid
 
 

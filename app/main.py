@@ -202,16 +202,17 @@ async def edit_page(page_name: str, request: Request, db: Session = Depends(get_
         if page is None:
             if existing_user.admin:
                 # page = crud.create_page(db, schemas.Page(page_name, ""))
-                data = RequestPageCommit(page=page_name, content='')
+                data = RequestPageCommit(page=page_name, content='').dict()
                 async with httpx.AsyncClient() as client:
                     coord_url = 'http://' + coord + ':8000' + '/request_page_commit'
                     coord_response = await client.post(coord_url, json=data)
                 if coord_response.status_code == 200:
                     # 200 indicates that the db has been updated
+                    page = crud.get_page(db, page_name)
                     response = templates.TemplateResponse("edit_page.html", {'request': request, 'name': page.name, 'content': page.content})
                     return response
                 else:
-                    response = RedirectResponse("create_page_failed.html", status_code=303)
+                    response = RedirectResponse("/create_page_failed", status_code=303)
                     return response
             else:
                 return RedirectResponse(f"/login", status_code=303)
@@ -230,7 +231,7 @@ async def edit_page_post(name: str = Form(...), content: str = Form(...), db: Se
     :param db: The database where info can be found.
     :param coord: The ip of the coordinator for 2PC.
     :param user: The user making the edits.
-    :return: Redirect to login fi the user is not logged in, or either the page, or a page indicating edit failure.
+    :return: Redirect to login if the user is not logged in, or either the page, or a page indicating edit failure.
     """
     if user:
         # crud.update_page_content(db, name, content)
