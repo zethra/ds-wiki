@@ -220,18 +220,18 @@ def create_or_update_page(db: Session, tid: int):
     :return: None.
     """
     db_page = None
-    with db.begin():  # commits at end or rollback on exception
-        to_commit = get_log(db, tid)
-        existing_page = get_page(db, to_commit.name)
-        if existing_page:
-            db.query(models.Page)\
-                .filter(models.Page.name == to_commit.name)\
-                .update({models.Page.content: to_commit.content}, synchronize_session=False)
-        else:
-            db_page = models.Page(name=to_commit.name, content=to_commit.content)
-            db.add(db_page)
-    if db_page:
-        db.refresh(db_page)
+    to_commit = get_log(db, tid)
+    existing_page = get_page(db, to_commit.name)
+    if existing_page:
+        db.query(models.Page)\
+            .filter(models.Page.name == to_commit.name)\
+            .update({models.Page.content: to_commit.content}, synchronize_session=False)
+    else:
+        db_page = models.Page(name=to_commit.name, content=to_commit.content)
+        db.add(db_page)
+    db.commit()
+    # if db_page:
+    #     db.refresh(db_page)
 
 
 def new_page_commit_to_log(db: Session, commit: RequestPageCommit):
