@@ -28,7 +28,7 @@ if __name__ == '__main__':
     COORD = conf['coordinator']
     REPLICAS = conf['replicas']
     if IP == COORD:
-        uvicorn.run(COORD.app, host=IP, port=PORT)
+        uvicorn.run(coordinator.app, host=IP, port=PORT)
     else:
         uvicorn.run(main.app, host=IP, port=PORT)
 

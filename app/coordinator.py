@@ -109,8 +109,9 @@ async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(g
     for server_ip in data_servers:
         crud.new_commit_to_pending(db, tid, server_ip, 'requested')
         async with httpx.AsyncClient() as client:
+            server_url = 'http://' + server_ip + ':8000' + '/can_page_commit'
             can_commit_data = PageCommit(transaction_id=tid, page=commit.page, content=commit.content).dict()
-            server_response = await client.post('http://' + server_ip + '/can_page_commit', json=can_commit_data)
+            server_response = await client.post(server_url, json=can_commit_data)
         commit_reply = CommitReply.parse_obj(server_response.json())
         can_commit = can_commit and commit_reply.commit
         if commit_reply:
@@ -124,8 +125,9 @@ async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(g
         for server_ip in data_servers:
             crud.update_status_in_pending(db, tid, server_ip, 'started')
             async with httpx.AsyncClient() as client:
+                server_url = 'http://' + server_ip + ':8000' + '/do_commit'
                 do_commit_data = DoCommit(transaction_id=tid, commit=True).dict()
-                server_response = await client.post('http://' + server_ip + '/do_commit', json=do_commit_data)
+                server_response = await client.post(server_url, json=do_commit_data)
             have_commit_reply = HaveCommit.parse_obj(server_response.json())
             have_committed = have_committed and have_commit_reply.commit
             crud.update_status_in_pending(db, tid, server_ip, 'done')  # remove from PendingCommits db table
@@ -137,8 +139,9 @@ async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(g
         for server_ip in data_servers:
             crud.update_status_in_pending(db, tid, server_ip, 'aborting')
             async with httpx.AsyncClient() as client:
+                server_url = 'http://' + server_ip + ':8000' + '/do_commit'
                 do_commit_data = DoCommit(transaction_id=tid, commit=False).dict()
-                server_response = await client.post('http://' + server_ip + '/do_commit', json=do_commit_data)
+                server_response = await client.post(server_url, json=do_commit_data)
             have_commit_reply = HaveCommit.parse_obj(server_response.json())
             crud.update_status_in_pending(db, tid, server_ip, 'done')  # remove from PendingCommits db table
         crud.update_in_log(db, tid, 'page', 'aborted', commit.page, commit.content, False)
@@ -161,8 +164,9 @@ async def request_user_commit(commit: RequestUserCommit, db: Session = Depends(g
     for server_ip in data_servers:
         crud.new_commit_to_pending(db, tid, server_ip, 'requested')
         async with httpx.AsyncClient() as client:
+            server_url = 'http://' + server_ip + ':8000' + '/can_user_commit'
             can_commit_data = UserCommit(transaction_id=tid, name=commit.name, admin=commit.admin).dict()
-            server_response = await client.post('http://' + server_ip + '/can_user_commit', json=can_commit_data)
+            server_response = await client.post(server_url, json=can_commit_data)
         commit_reply = CommitReply.parse_obj(server_response.json())
         can_commit = can_commit and commit_reply.commit
         if commit_reply:
@@ -176,8 +180,9 @@ async def request_user_commit(commit: RequestUserCommit, db: Session = Depends(g
         for server_ip in data_servers:
             crud.update_status_in_pending(db, tid, server_ip, 'started')
             async with httpx.AsyncClient() as client:
+                server_url = 'http://' + server_ip + ':8000' + '/do_commit'
                 do_commit_data = DoCommit(transaction_id=tid, commit=True).dict()
-                server_response = await client.post('http://' + server_ip + '/do_commit', json=do_commit_data)
+                server_response = await client.post(server_url, json=do_commit_data)
             have_commit_reply = HaveCommit.parse_obj(server_response.json())
             have_committed = have_committed and have_commit_reply.commit
             crud.update_status_in_pending(db, tid, server_ip, 'done')  # remove from PendingCommits db table
@@ -189,8 +194,9 @@ async def request_user_commit(commit: RequestUserCommit, db: Session = Depends(g
         for server_ip in data_servers:
             crud.update_status_in_pending(db, tid, server_ip, 'aborting')
             async with httpx.AsyncClient() as client:
+                server_url = 'http://' + server_ip + ':8000' + '/do_commit'
                 do_commit_data = DoCommit(transaction_id=tid, commit=False).dict()
-                server_response = await client.post('http://' + server_ip + '/do_commit', json=do_commit_data)
+                server_response = await client.post(server_url, json=do_commit_data)
             have_commit_reply = HaveCommit.parse_obj(server_response.json())
             crud.update_status_in_pending(db, tid, server_ip, 'done')  # remove from PendingCommits db table
         crud.update_in_log(db, tid, 'user', 'aborted', commit.name, '', commit.admin)

@@ -103,7 +103,7 @@ async def index(request: Request, db: Session = Depends(get_db), user: Optional[
     admin = False
     if user:
         current_user = crud.get_user_by_name(db, user)
-        if current_user.admin:
+        if current_user and current_user.admin:
             admin = True
     return templates.TemplateResponse("index.html", {'request': request, 'admin': admin, 'user': user})
 
@@ -173,7 +173,9 @@ async def create_post(user: str = Form(...), db: Session = Depends(get_db), coor
         # new_user = crud.create_user(db, user, admin)
         data = RequestUserCommit(name=user, admin=admin).dict()
         async with httpx.AsyncClient() as client:
-            coord_response = await client.post('http://' + coord + '/request_user_commit', json=data)
+            coord_url = 'http://' + coord + ':8000' + '/request_user_commit'
+            print(f'create_post: connecting to {coord_url}')
+            coord_response = await client.post(coord_url, json=data)
         if coord_response.status_code == 200:
             response = RedirectResponse("/login", status_code=303)
             return response
@@ -202,7 +204,8 @@ async def edit_page(page_name: str, request: Request, db: Session = Depends(get_
                 # page = crud.create_page(db, schemas.Page(page_name, ""))
                 data = RequestPageCommit(page=page_name, content='')
                 async with httpx.AsyncClient() as client:
-                    coord_response = await client.post('http://' + coord + '/request_page_commit', json=data)
+                    coord_url = 'http://' + coord + ':8000' + '/request_page_commit'
+                    coord_response = await client.post(coord_url, json=data)
                 if coord_response.status_code == 200:
                     # 200 indicates that the db has been updated
                     response = templates.TemplateResponse("edit_page.html", {'request': request, 'name': page.name, 'content': page.content})
@@ -233,7 +236,8 @@ async def edit_page_post(name: str = Form(...), content: str = Form(...), db: Se
         # crud.update_page_content(db, name, content)
         data = RequestPageCommit(page=name, content=content).dict()
         async with httpx.AsyncClient() as client:
-            coord_response = await client.post('http://' + coord + '/request_page_commit', json=data)
+            coord_url = 'http://' + coord + ':8000' + '/request_page_commit'
+            coord_response = await client.post(coord_url, json=data)
         if coord_response.status_code == 200:
             # 200 indicates that the db has been updated
             response = RedirectResponse(f"/page/{name}", status_code=303)
@@ -296,7 +300,7 @@ async def create_page_post(name: str = Form(...)):
     """
     POST route handler for creating a page.
     :param name: The name of the page to be created.
-    :return: Reditect to the edit page webpage for that page.
+    :return: Redirect to the edit page webpage for that page.
     """
     response = RedirectResponse(f"/edit_page/{name}", status_code=303)
     return response
@@ -360,7 +364,8 @@ async def edit_admin_post(request: Request, db: Session = Depends(get_db),
             # crud.update_admin(db, u.name, True)
             data = RequestUserCommit(name=u.name, admin=True).dict()
             async with httpx.AsyncClient() as client:
-                coord_response = await client.post('http://' + coord + '/request_user_commit', json=data)
+                coord_url = 'http://' + coord + ':8000' + '/request_user_commit'
+                coord_response = await client.post(coord_url, json=data)
             if coord_response.status_code != 200:
                 success = False
                 print('failed', u.name, 'admin')
@@ -370,7 +375,8 @@ async def edit_admin_post(request: Request, db: Session = Depends(get_db),
             # crud.update_admin(db, u.name, False)
             data = RequestUserCommit(name=u.name, admin=False).dict()
             async with httpx.AsyncClient() as client:
-                coord_response = await client.post('http://' + coord + '/request_user_commit', json=data)
+                coord_url = 'http://' + coord + ':8000' + '/request_user_commit'
+                coord_response = await client.post(coord_url, json=data)
             if coord_response.status_code != 200:
                 success = False
                 print('failed', u.name, 'not admin')

@@ -259,10 +259,10 @@ def new_user_commit_to_log(db: Session, commit: RequestUserCommit):
     :param commit: The user commit to try to commit.
     :return: The tid fo the newly created transaction log entry.
     """
-    with db.begin():
-        db_log = models.Log(type='page', status='pending', name=commit.name, content='', admin=commit.admin)
-        db.refresh(db_log)
-        tid = db_log.tid
+    db_log = models.Log(type='page', status='pending', name=commit.name, content='', admin=commit.admin)
+    db.commit()
+    db.refresh(db_log)
+    tid = db_log.tid
     return tid
 
 
