@@ -3,6 +3,7 @@ Webapp representing the 2 Phase Commit coordinator role.
 Coordinates the distributed transaction to keep all data servers in sync.
 """
 
+import asyncio
 import httpx
 from fastapi import FastAPI
 from fastapi.param_functions import Depends
@@ -82,7 +83,6 @@ async def startup_event():
     CONFIG['SERVERS'] = conf['replicas']
     # TODO check db log table for anything in a weird state and resolve it
 
-
 # This is used when a server forwards a client edit for a page request
 @app.post("/request_page_commit")
 async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(get_db),
@@ -103,12 +103,17 @@ async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(g
     tid = crud.new_page_commit_to_log(db, commit)
 
     can_commit = True
+    requests = []
     for server_ip in data_servers:
         crud.new_commit_to_pending(db, tid, server_ip, 'requested')
-        async with httpx.AsyncClient() as client:
-            server_url = 'http://' + server_ip + ':8000' + '/can_page_commit'
-            can_commit_data = PageCommit(transaction_id=tid, page=commit.page, content=commit.content).dict()
-            server_response = await client.post(server_url, json=can_commit_data)
+        server_url = 'http://' + server_ip + ':8000' + '/can_page_commit'
+        can_commit_data = PageCommit(transaction_id=tid, page=commit.page, content=commit.content).dict()
+        requests.append((server_url, can_commit_data))
+
+    async with httpx.AsyncClient() as client:
+        res = await asyncio.gather(*[client.post(url, json=req) for (url, req) in requests])
+
+    for server_response, server_ip in zip(res, data_servers):
         commit_reply = CommitReply.parse_obj(server_response.json())
         if commit_reply:
             can_commit = can_commit and commit_reply.commit
@@ -119,15 +124,20 @@ async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(g
             print('Aborting because', server_ip, 'sent invalid response')
             crud.update_status_in_pending(db, tid, server_ip, 'aborted')
 
+    requests = []
     if can_commit:
         have_committed = True
         crud.update_in_log(db, tid, 'page', 'promised', commit.page, commit.content, False)
         for server_ip in data_servers:
             crud.update_status_in_pending(db, tid, server_ip, 'started')
-            async with httpx.AsyncClient() as client:
-                server_url = 'http://' + server_ip + ':8000' + '/do_commit'
-                do_commit_data = DoCommit(transaction_id=tid, commit=True).dict()
-                server_response = await client.post(server_url, json=do_commit_data)
+            server_url = 'http://' + server_ip + ':8000' + '/do_commit'
+            do_commit_data = DoCommit(transaction_id=tid, commit=True).dict()
+            requests.append((server_url, do_commit_data))
+
+        async with httpx.AsyncClient() as client:
+            res = await asyncio.gather(*[client.post(url, json=req) for (url, req) in requests])
+
+        for server_response, server_ip in zip(res, data_servers):
             have_commit_reply = HaveCommit.parse_obj(server_response.json())
             have_committed = have_committed and have_commit_reply.commit
             crud.update_status_in_pending(db, tid, server_ip, 'done')  # remove from PendingCommits db table
