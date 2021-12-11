@@ -49,4 +49,5 @@ Seems to cause a bug where every request fails after a while
 
 ### 4 clients
 
-
+94.74 req/s
+407/478 failed
