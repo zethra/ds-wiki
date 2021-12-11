@@ -205,7 +205,7 @@ async def edit_page(page_name: str, request: Request, db: Session = Depends(get_
                 data = RequestPageCommit(page=page_name, content='').dict()
                 async with httpx.AsyncClient() as client:
                     coord_url = 'http://' + coord + ':8000' + '/request_page_commit'
-                    coord_response = await client.post(coord_url, json=data)
+                    coord_response = await client.post(coord_url, json=data, timeout=None)
                 if coord_response.status_code == 200:
                     # 200 indicates that the db has been updated
                     page = crud.get_page(db, page_name)
@@ -238,7 +238,7 @@ async def edit_page_post(name: str = Form(...), content: str = Form(...), db: Se
         data = RequestPageCommit(page=name, content=content).dict()
         async with httpx.AsyncClient() as client:
             coord_url = 'http://' + coord + ':8000' + '/request_page_commit'
-            coord_response = await client.post(coord_url, json=data)
+            coord_response = await client.post(coord_url, json=data, timeout=None)
         if coord_response.status_code == 200:
             # 200 indicates that the db has been updated
             response = RedirectResponse(f"/page/{name}", status_code=303)

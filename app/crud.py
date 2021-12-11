@@ -292,3 +292,16 @@ def update_status_in_pending(db: Session, tid: int, sender: str, status: str):
     db.query(models.PendingCommits)\
         .filter(models.PendingCommits.tid == tid and models.PendingCommits.sender == sender)\
         .update({models.PendingCommits.status: status}, synchronize_session=False)
+
+def log_has_open_tranaction(db: Session, type: str, name: str) -> bool:
+    """
+    Check if there is an open transaction on this object
+    :param db: The db session to update in.
+    :param type: The type of commit {page, user}.
+    :param name: The name of the page or user.
+    :return: If there are any active transactions.
+    """
+    return db.query(models.Log) \
+        .filter(models.Log.type == type, models.Log.name == name,
+                models.Log.status != 'done', models.Log.status != 'aborted') \
+        .count() != 0

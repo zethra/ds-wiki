@@ -102,6 +102,9 @@ async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(g
     """
     # Log table is basically a list of all commits we have attempted
     # PendingCommits tracks the status of any in-progress commits for each server participating (so pk is (tid, sender) )
+    if crud.log_has_open_tranaction(db, 'page', commit.page):
+        print('Aborting due to active transaction')
+        return Response(status_code=status.HTTP_409_CONFLICT)
 
     tid = crud.new_page_commit_to_log(db, commit)
 
@@ -113,10 +116,13 @@ async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(g
             can_commit_data = PageCommit(transaction_id=tid, page=commit.page, content=commit.content).dict()
             server_response = await client.post(server_url, json=can_commit_data)
         commit_reply = CommitReply.parse_obj(server_response.json())
-        can_commit = can_commit and commit_reply.commit
         if commit_reply:
+            can_commit = can_commit and commit_reply.commit
+            if not commit_reply.commit:
+                print('Aborting because', server_ip, 'aborted')
             crud.update_status_in_pending(db, tid, server_ip, 'promised')
         else:
+            print('Aborting because', server_ip, 'sent invalid response')
             crud.update_status_in_pending(db, tid, server_ip, 'aborted')
 
     if can_commit:
@@ -158,6 +164,9 @@ async def request_user_commit(commit: RequestUserCommit, db: Session = Depends(g
     :param data_servers: The data servers participating in the 2PC.
     :return: The response indicating the success of the commit.
     """
+    if crud.log_has_open_tranaction(db, 'user', commit.name):
+        return Response(status_code=status.HTTP_409_CONFLICT)
+
     tid = crud.new_user_commit_to_log(db, commit)
 
     can_commit = True
