@@ -4,50 +4,49 @@ All tests run for 5s
 
 ### 1 client
 
-30.77 req/s
-0/154 failed
+9.78 req/s
+0/49 failed
 
 ### 2 clients
 
-78 req/s
-267/400 failed
+40.56 req/s
+136/205 failed
 
 ### 4 clients
 
-128 req/s
-623/637 failed
-Seems to cause a bug where every request fails after a while
+70.30 req/s
+305/356 failed
 
 ## 2 servers
 
 ### 1 client
 
-27.77 req/s
-0/138 failed
+7.78 req/s
+0/39 failed
 
 ### 2 clients
 
-70 req/s
-235/352 failed
+28.97 req/s
+97/147 failed
 
 ### 4 clients
 
-104 req/ss
-447/524 failed
+61.31 req/ss
+267/311 failed
 
 ## 4 servers
 
 ### 1 client
 
-22.38 req/s
-0/112 failed
+5.79 req/s
+0/29 failed
 
 ### 2 clients
 
-62.14 req/s
-209/311 failed
+20.59 req/s
+70/105 failed
 
 ### 4 clients
 
-94.74 req/s
-407/478 failed
+51.59 req/s
+225/261 failed
