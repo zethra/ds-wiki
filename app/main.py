@@ -13,6 +13,7 @@ from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm.session import Session
 from starlette.requests import Request
 from starlette.responses import RedirectResponse
+from time import perf_counter
 
 import start
 from app import crud, models
@@ -236,9 +237,12 @@ async def edit_page_post(name: str = Form(...), content: str = Form(...),
     if user:
         # crud.update_page_content(db, name, content)
         data = RequestPageCommit(page=name, content=content).dict()
+        start = perf_counter()
         async with httpx.AsyncClient() as client:
             coord_url = 'http://' + coord + ':8000' + '/request_page_commit'
             coord_response = await client.post(coord_url, json=data, timeout=None)
+        done = perf_counter()
+        print(f"Coordination commit took: {done - start}")
         if coord_response.status_code == 200:
             # 200 indicates that the db has been updated
             response = RedirectResponse(f"/page/{name}", status_code=303)
@@ -444,15 +448,18 @@ async def can_page_commit(commit: PageCommit, db: Session = Depends(get_db), ip:
     :param ip: The IP of this data server.
     :return: JSON CommitReply stating if this data server is willing to commit or not.
     """
+    start = perf_counter()
     if crud.tid_in_log(db, commit.transaction_id):
         db_log = crud.get_log(db, commit.transaction_id)
         if db_log.status == 'promised':
+            print(f"Can commit took: {perf_counter() - start}")
             return CommitReply(sender=ip, commit=True, transaction_id=commit.transaction_id)
         else:
             # should this change status to aborted in log?
             return CommitReply(sender=ip, commit=False, transaction_id=commit.transaction_id)
     else:
         crud.add_to_log(db, commit.transaction_id, 'page', 'promised', commit.page, commit.content, False)
+        print(f"Can commit took: {perf_counter() - start}")
         return CommitReply(sender=ip, commit=True, transaction_id=commit.transaction_id)
 
 
@@ -490,6 +497,7 @@ async def do_commit(commit: DoCommit, db: Session = Depends(get_db), ip: str = D
     :param ip: The ip of this data server.
     :return: JSON HaveCommit message indicating whether or not this data server has commit or not.
     """
+    start = perf_counter()
     if crud.tid_in_log(db, commit.transaction_id):
         db_log = crud.get_log(db, commit.transaction_id)
         if not commit.commit:  # coordinator decided to abort the commit
@@ -502,6 +510,7 @@ async def do_commit(commit: DoCommit, db: Session = Depends(get_db), ip: str = D
                     crud.create_or_update_user(db, commit.transaction_id)
                 elif db_log.type == 'page':
                     crud.create_or_update_page(db, commit.transaction_id)
+                print(f"Do commit took {perf_counter() - start}")
                 return HaveCommit(transaction_id=commit.transaction_id, sender=ip, commit=True)
             else:
                 crud.update_in_log(db, commit.transaction_id, db_log.type, 'aborted', db_log.name, db_log.content, db_log.admin)

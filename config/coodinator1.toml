@@ -1,0 +1,4 @@
+this_ip = "127.0.0.1"
+port = 8000
+replicas = ["127.0.0.2"]
+coordinator = "127.0.0.1"

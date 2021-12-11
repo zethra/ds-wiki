@@ -10,6 +10,7 @@ from fastapi.param_functions import Depends
 from sqlalchemy.orm.session import Session
 from starlette.responses import Response
 from starlette import status
+from time import perf_counter
 
 import start
 from app import crud, models
@@ -94,6 +95,7 @@ async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(g
     :param data_servers: The data servers participating in the 2PC.
     :return: The response indicating the success of the commit.
     """
+    start = perf_counter()
     # Log table is basically a list of all commits we have attempted
     # PendingCommits tracks the status of any in-progress commits for each server participating (so pk is (tid, sender) )
     if crud.log_has_open_tranaction(db, 'page', commit.page):
@@ -110,8 +112,10 @@ async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(g
         can_commit_data = PageCommit(transaction_id=tid, page=commit.page, content=commit.content).dict()
         requests.append((server_url, can_commit_data))
 
+    send_can_commit = perf_counter()
     async with httpx.AsyncClient() as client:
         res = await asyncio.gather(*[client.post(url, json=req) for (url, req) in requests])
+    got_can_commit = perf_counter()
 
     for server_response, server_ip in zip(res, data_servers):
         commit_reply = CommitReply.parse_obj(server_response.json())
@@ -134,14 +138,26 @@ async def request_page_commit(commit: RequestPageCommit, db: Session = Depends(g
             do_commit_data = DoCommit(transaction_id=tid, commit=True).dict()
             requests.append((server_url, do_commit_data))
 
+        send_do_commit = perf_counter()
+
         async with httpx.AsyncClient() as client:
             res = await asyncio.gather(*[client.post(url, json=req) for (url, req) in requests])
+
+        got_do_commit = perf_counter()
 
         for server_response, server_ip in zip(res, data_servers):
             have_commit_reply = HaveCommit.parse_obj(server_response.json())
             have_committed = have_committed and have_commit_reply.commit
             crud.update_status_in_pending(db, tid, server_ip, 'done')  # remove from PendingCommits db table
         crud.update_in_log(db, tid, 'page', 'done', commit.page, commit.content, False)
+
+        done = perf_counter()
+
+        print(f"""Start took: {send_can_commit - start}
+Can commit took: {got_can_commit - send_can_commit}
+Decision took: {send_do_commit - got_can_commit}
+Do commit took: {got_do_commit - send_do_commit}
+Finishing took: {done - got_do_commit}""")
         return Response(status_code=status.HTTP_200_OK)
 
     else:
