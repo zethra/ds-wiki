@@ -3,21 +3,15 @@ Webapp representing the 2 Phase Commit coordinator role.
 Coordinates the distributed transaction to keep all data servers in sync.
 """
 
-from typing import Optional
-
 import httpx
-from fastapi import FastAPI, Form
-from fastapi.exceptions import HTTPException
-from fastapi.param_functions import Cookie, Depends
-from fastapi.staticfiles import StaticFiles
-from fastapi.templating import Jinja2Templates
+from fastapi import FastAPI
+from fastapi.param_functions import Depends
 from sqlalchemy.orm.session import Session
-from starlette.requests import Request
-from starlette.responses import RedirectResponse, Response
+from starlette.responses import Response
 from starlette import status
 
 import start
-from app import crud, models, schemas
+from app import crud, models
 
 from .database import SessionLocal, engine
 from .schemas import PageCommit, UserCommit, CommitReply, DoCommit, HaveCommit, RequestUserCommit, RequestPageCommit

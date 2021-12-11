@@ -15,7 +15,7 @@ from starlette.requests import Request
 from starlette.responses import RedirectResponse
 
 import start
-from app import crud, models, schemas
+from app import crud, models
 
 from .database import SessionLocal, engine
 from .schemas import PageCommit, DoCommit, UserCommit, CommitReply, HaveCommit, RequestUserCommit, RequestPageCommit
@@ -222,7 +222,7 @@ async def edit_page(page_name: str, request: Request, db: Session = Depends(get_
 
 
 @app.post("/edit_page")
-async def edit_page_post(name: str = Form(...), content: str = Form(...), db: Session = Depends(get_db),
+async def edit_page_post(name: str = Form(...), content: str = Form(...),
                          coord: str = Depends(get_coordinator), user: Optional[str] = Cookie(None)):
     """
     POST route handler for applying the edits made by a user.
