@@ -21,7 +21,7 @@ response = function (status, headers, body)
     -- io.write(out)
     if string.find(headers["location"], "failed") then
         errs = errs + 1
-        io.write(string.format("error %d\n", errs))
+        io.write(string.format("error %d/%d\n", errs, cnt))
     end
 end
 

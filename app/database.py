@@ -11,7 +11,8 @@ from sqlalchemy.orm import sessionmaker
 """
 Where the Sqlite database can be found.
 """
-SQLALCHEMY_DATABASE_URL = f"sqlite:///./sql_app_{os.path.basename(sys.argv[1])}.db"
+# SQLALCHEMY_DATABASE_URL = f"sqlite:///./sql_app_{os.path.basename(sys.argv[1])}.db"
+SQLALCHEMY_DATABASE_URL = f"sqlite://"
 
 """
 The db engine.

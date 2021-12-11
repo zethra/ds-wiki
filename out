@@ -1,0 +1,929 @@
+INFO:     Started server process [146862]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:40442 - "POST /request_user_commit HTTP/1.1" 200 OK
+Start took: 0.01210704300137877
+Can commit took: 0.014257552998969913
+Decision took: 0.006986536000113119
+Do commit took: 0.021019157000409905
+Finishing took: 0.005631269999867072
+INFO:     127.0.0.1:40444 - "POST /request_page_commit HTTP/1.1" 200 OK
+Start took: 0.01821175300028699
+Can commit took: 0.021136383998964448
+Decision took: 0.01520651500140957
+Do commit took: 0.03455353599929367
+Finishing took: 0.006643771999733872
+INFO:     127.0.0.1:40446 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40448 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40450 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40456 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40460 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40458 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40462 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40466 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40464 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.02135443299994222
+Can commit took: 0.03890141699957894
+Decision took: 0.0066466600001149345
+Do commit took: 0.027464995999253006
+Finishing took: 0.009681878000264987
+INFO:     127.0.0.1:40454 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40472 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40468 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40476 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40482 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40480 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40484 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40488 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40486 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011746639998818864
+Can commit took: 0.03802143299981253
+Decision took: 0.006451489000028232
+Do commit took: 0.030896296000719303
+Finishing took: 0.005534224999792059
+INFO:     127.0.0.1:40474 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40492 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40496 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40494 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40502 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40498 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40500 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011957999000514974
+Can commit took: 0.01779996599907463
+Decision took: 0.006715299999996205
+Do commit took: 0.03617077200033236
+Finishing took: 0.009453766999286017
+INFO:     127.0.0.1:40490 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40508 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40510 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40506 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40516 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40518 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40512 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.014853439999569673
+Can commit took: 0.0355410660013149
+Decision took: 0.007512490999943111
+Do commit took: 0.03543476399863721
+Finishing took: 0.0056003030003921594
+INFO:     127.0.0.1:40504 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40520 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40522 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40526 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40534 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40528 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40530 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.014267003998611472
+Can commit took: 0.05050388000017847
+Decision took: 0.007269102999998722
+Do commit took: 0.035845733000314794
+Finishing took: 0.008912858000257984
+INFO:     127.0.0.1:40524 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40538 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40540 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40542 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40544 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40546 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40552 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40550 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.01221581400022842
+Can commit took: 0.042546823999146
+Decision took: 0.006722816000547027
+Do commit took: 0.03431298199939192
+Finishing took: 0.005547436001506867
+INFO:     127.0.0.1:40536 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40556 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40558 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40560 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40564 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40566 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40562 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011669072999211494
+Can commit took: 0.02552923499933968
+Decision took: 0.006670978000329342
+Do commit took: 0.024447304000204895
+Finishing took: 0.005722793001041282
+INFO:     127.0.0.1:40554 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40572 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40568 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40574 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40576 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40578 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40580 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40582 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40584 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.01176192499951867
+Can commit took: 0.037511353999434505
+Decision took: 0.00689258500096912
+Do commit took: 0.039137431000199285
+Finishing took: 0.006004535000101896
+INFO:     127.0.0.1:40570 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40592 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40588 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40590 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40598 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40596 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40594 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011640392000117572
+Can commit took: 0.04043385499971919
+Decision took: 0.006620977999773459
+Do commit took: 0.030967479999162606
+Finishing took: 0.005528458001208492
+INFO:     127.0.0.1:40586 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40602 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40606 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40604 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40608 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40610 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40612 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012158887000623508
+Can commit took: 0.01806126199880964
+Decision took: 0.006783922000977327
+Do commit took: 0.03718193299937411
+Finishing took: 0.005940981000094325
+INFO:     127.0.0.1:40600 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40618 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40620 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40622 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40624 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40628 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40630 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40626 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012351929999567801
+Can commit took: 0.03699953599971195
+Decision took: 0.00667863499984378
+Do commit took: 0.02400375200159033
+Finishing took: 0.005738977999499184
+INFO:     127.0.0.1:40614 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40632 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40638 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40640 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40642 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40646 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40644 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011836983998364303
+Can commit took: 0.03823714800091693
+Decision took: 0.007679680000364897
+Do commit took: 0.023855165998611483
+Finishing took: 0.005469252000693814
+INFO:     127.0.0.1:40634 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40650 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40652 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40654 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40658 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40656 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40660 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40662 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40666 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011857034000058775
+Can commit took: 0.043089455999506754
+Decision took: 0.006836857999587664
+Do commit took: 0.028502741999545833
+Finishing took: 0.005645185001412756
+INFO:     127.0.0.1:40648 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40670 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40672 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40674 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40680 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40678 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40676 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011859018999530235
+Can commit took: 0.027966379000645247
+Decision took: 0.009935596999639529
+Do commit took: 0.04941836900070484
+Finishing took: 0.007066956999551621
+INFO:     127.0.0.1:40668 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40686 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40684 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40688 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40690 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40692 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40694 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40696 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011685415998726967
+Can commit took: 0.03937854100149707
+Decision took: 0.007002876000115066
+Do commit took: 0.049628340999333886
+Finishing took: 0.0056530500005465
+INFO:     127.0.0.1:40682 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40700 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40704 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40702 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40710 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40708 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40706 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012144807998993201
+Can commit took: 0.020513339000899578
+Decision took: 0.006958932999623357
+Do commit took: 0.04765317900091759
+Finishing took: 0.00626758799990057
+INFO:     127.0.0.1:40698 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40716 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40714 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40718 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40720 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40722 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40724 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40726 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40730 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011999785001535201
+Can commit took: 0.04664680699897872
+Decision took: 0.006772455999453086
+Do commit took: 0.03386373500143236
+Finishing took: 0.0055994449994614115
+INFO:     127.0.0.1:40712 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40736 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40738 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40742 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40748 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40744 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40746 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.01174985900070169
+Can commit took: 0.017665666999164387
+Decision took: 0.006643568000072264
+Do commit took: 0.03257240600032674
+Finishing took: 0.005483819999426487
+INFO:     127.0.0.1:40734 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40750 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40754 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40756 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40760 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40758 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40762 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40764 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40766 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.01205631000084395
+Can commit took: 0.03623438199974771
+Decision took: 0.0065471239995531505
+Do commit took: 0.033758363000742975
+Finishing took: 0.005422356000053696
+INFO:     127.0.0.1:40752 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40772 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40770 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40774 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40780 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40776 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40778 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.01203552600054536
+Can commit took: 0.020248687000275822
+Decision took: 0.006470500999057549
+Do commit took: 0.03261712300081854
+Finishing took: 0.00560130499980005
+INFO:     127.0.0.1:40768 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40786 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40782 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40788 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40792 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40790 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40794 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40798 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40802 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012233280000145896
+Can commit took: 0.04936448199987353
+Decision took: 0.009672805001173401
+Do commit took: 0.036451739999392885
+Finishing took: 0.005793383999844082
+INFO:     127.0.0.1:40784 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40810 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40808 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40806 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40812 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40814 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40816 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012916104000396444
+Can commit took: 0.027598158998443978
+Decision took: 0.008074224000665708
+Do commit took: 0.039275903000088874
+Finishing took: 0.006046415999662713
+INFO:     127.0.0.1:40804 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40822 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40820 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40826 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40830 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40832 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40834 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40836 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40840 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.016948589000094216
+Can commit took: 0.05209382000066398
+Decision took: 0.00759886499872664
+Do commit took: 0.044537406000017654
+Finishing took: 0.005479216000821907
+INFO:     127.0.0.1:40824 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40846 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40844 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40848 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40850 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40852 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40854 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.010783677998915664
+Can commit took: 0.018400554999971064
+Decision took: 0.0077547310011141235
+Do commit took: 0.03709012799845368
+Finishing took: 0.006410205000065616
+INFO:     127.0.0.1:40842 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40858 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40856 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40866 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40868 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40870 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40872 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40876 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40874 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012928686999657657
+Can commit took: 0.044272140999964904
+Decision took: 0.006554915000378969
+Do commit took: 0.041915656000128365
+Finishing took: 0.005894960999285104
+INFO:     127.0.0.1:40862 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40884 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40880 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40882 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40886 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40888 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40890 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.013221469000200159
+Can commit took: 0.024304145999849425
+Decision took: 0.007360206000157632
+Do commit took: 0.03155904100094631
+Finishing took: 0.005579011000008904
+INFO:     127.0.0.1:40878 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40894 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40892 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40898 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40904 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40900 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40906 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011718267000105698
+Can commit took: 0.03130031799992139
+Decision took: 0.006792813001084141
+Do commit took: 0.02370156199867779
+Finishing took: 0.005669447000400396
+INFO:     127.0.0.1:40896 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40910 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40908 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40914 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40916 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40920 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40918 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011715918999470887
+Can commit took: 0.03159182600029453
+Decision took: 0.006632831999013433
+Do commit took: 0.024802457000987488
+Finishing took: 0.005967584998870734
+INFO:     127.0.0.1:40912 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40922 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40926 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40928 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40930 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40932 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40934 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40936 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012427763000232517
+Can commit took: 0.03351040999950783
+Decision took: 0.006647963000432355
+Do commit took: 0.04309028399984527
+Finishing took: 0.005608430999927805
+INFO:     127.0.0.1:40924 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40942 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40940 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40944 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40950 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40946 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40948 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012361319000774529
+Can commit took: 0.029011277998506557
+Decision took: 0.006672764000541065
+Do commit took: 0.05910345899974345
+Finishing took: 0.005557283000598545
+INFO:     127.0.0.1:40938 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40956 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40952 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40958 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40960 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40964 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40966 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40968 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40970 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012052003999997396
+Can commit took: 0.03813377099868376
+Decision took: 0.007312574000025052
+Do commit took: 0.0370761570011382
+Finishing took: 0.005656019999150885
+INFO:     127.0.0.1:40954 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40974 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40976 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40978 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40980 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40984 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40982 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011756411000533262
+Can commit took: 0.021056138999483665
+Decision took: 0.00668139800109202
+Do commit took: 0.034462085999621195
+Finishing took: 0.00869094799963932
+INFO:     127.0.0.1:40972 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:40988 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40990 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40994 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40998 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:40996 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41000 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41004 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41002 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.02798191100009717
+Can commit took: 0.06990124100047979
+Decision took: 0.006768729999748757
+Do commit took: 0.032287353000356234
+Finishing took: 0.0056904439989011735
+INFO:     127.0.0.1:40986 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41008 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41012 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41010 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012550770999951055
+Can commit took: 0.019258342999819433
+Decision took: 0.007104811000317568
+Do commit took: 0.030370561999006895
+Finishing took: 0.006795912000598037
+INFO:     127.0.0.1:41006 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41014 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41016 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41020 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41024 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41026 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41022 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011843207001220435
+Can commit took: 0.03237758499926713
+Decision took: 0.006702737000523484
+Do commit took: 0.027608803999100928
+Finishing took: 0.005573790000198642
+INFO:     127.0.0.1:41018 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41030 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41028 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41034 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41036 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41038 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41040 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41042 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012467131000448717
+Can commit took: 0.03290150599968911
+Decision took: 0.00668215599944233
+Do commit took: 0.02456509100011317
+Finishing took: 0.005655693001244799
+INFO:     127.0.0.1:41032 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41048 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41044 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41050 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41052 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41056 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41058 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41060 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012667175000387942
+Can commit took: 0.03382276899901626
+Decision took: 0.006705310999677749
+Do commit took: 0.027279965001071105
+Finishing took: 0.005932605999987572
+INFO:     127.0.0.1:41046 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41062 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41064 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41068 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41070 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41072 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41074 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.01215801899888902
+Can commit took: 0.03944880400013062
+Decision took: 0.0071713070010446245
+Do commit took: 0.031235816999469534
+Finishing took: 0.006035624999640277
+INFO:     127.0.0.1:41066 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41082 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41080 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41078 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41086 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41084 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41088 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011764679000407341
+Can commit took: 0.04034294499979296
+Decision took: 0.00761700099974405
+Do commit took: 0.030939825999666937
+Finishing took: 0.005448191999676055
+INFO:     127.0.0.1:41076 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41092 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41090 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41096 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41098 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41100 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41106 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41102 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41104 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.0118538830010948
+Can commit took: 0.03776523799933784
+Decision took: 0.007964762999108643
+Do commit took: 0.029376362001130474
+Finishing took: 0.005656186998749035
+INFO:     127.0.0.1:41094 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41112 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41110 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41114 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41116 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41118 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41122 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41120 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012913118000142276
+Can commit took: 0.03507181799977843
+Decision took: 0.007555755999419489
+Do commit took: 0.045141782000428066
+Finishing took: 0.0058649599995987955
+INFO:     127.0.0.1:41108 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41126 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41124 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41132 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41134 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41138 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41140 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41142 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011615473000347265
+Can commit took: 0.03068009699927643
+Decision took: 0.007237657000587205
+Do commit took: 0.04439702299896453
+Finishing took: 0.006033375000697561
+INFO:     127.0.0.1:41128 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41144 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41148 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41150 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41152 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41158 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41156 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41154 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012507881998317316
+Can commit took: 0.036097338001127355
+Decision took: 0.007221089999802643
+Do commit took: 0.029655622000063886
+Finishing took: 0.0060649690003629075
+INFO:     127.0.0.1:41146 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41162 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41160 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41166 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41168 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41172 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41170 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41174 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012228249001054792
+Can commit took: 0.03337360200021067
+Decision took: 0.006749772999683046
+Do commit took: 0.043938752000030945
+Finishing took: 0.005905496000195853
+INFO:     127.0.0.1:41164 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41180 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41178 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41182 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41184 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41186 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41188 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41192 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41194 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011590370000703842
+Can commit took: 0.04728413699922385
+Decision took: 0.00689977500042005
+Do commit took: 0.026781844999277382
+Finishing took: 0.0056765230001474265
+INFO:     127.0.0.1:41176 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41196 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41202 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41200 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41204 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41208 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41212 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41206 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.011953056999118417
+Can commit took: 0.04112008800075273
+Decision took: 0.006586728999536717
+Do commit took: 0.024481050999384024
+Finishing took: 0.005557962000239058
+INFO:     127.0.0.1:41198 - "POST /request_page_commit HTTP/1.1" 200 OK
+Aborting due to active transaction
+INFO:     127.0.0.1:41216 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41214 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Aborting due to active transaction
+INFO:     127.0.0.1:41220 - "POST /request_page_commit HTTP/1.1" 409 Conflict
+Start took: 0.012186599999040482
+Can commit took: 0.018752198999209213
+Decision took: 0.0070384590017056325
+Do commit took: 0.02148156499970355
+Finishing took: 0.0056520669986639405
+INFO:     127.0.0.1:41218 - "POST /request_page_commit HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [146862]
