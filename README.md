@@ -11,8 +11,8 @@ in `config/`. The config is structured as follows:
 ```toml
 this_ip = "<IP of this server>"
 port = <port to run the web server on>
-replicas = "<list of all web server IPs>"
-coordinator = [<IP of the coordinator server>]
+replicas = [<list of all web server IPs>]
+coordinator = "<IP of the coordinator server>"
 ```
 
 If `this_ip == coordinator` then that server will act as the coordinator.
